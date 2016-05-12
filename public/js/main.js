@@ -1,7 +1,7 @@
 $(function () {
 
     var map = initializeMap();
-    var $addItemButton = $('#options-panel').find('button');
+    /*var $addItemButton = $('#options-panel').find('button');
 
     var $listGroups = {
         hotel: $('#hotel-list').children('ul'),
@@ -26,7 +26,7 @@ $(function () {
         []
     ];
 
-    var currentDayNum = 1;
+    var currentDayNum = 1;*/
 
     /*
     --------------------------
@@ -34,7 +34,7 @@ $(function () {
     --------------------------
      */
 
-    $addItemButton.on('click', function () {
+    /*$addItemButton.on('click', function () {
 
         var $this = $(this);
         var $select = $this.siblings('select');
@@ -104,7 +104,7 @@ $(function () {
     fillInOptions(hotels, $('#hotel-choices'));
     fillInOptions(restaurants, $('#restaurant-choices'));
     fillInOptions(activities, $('#activity-choices'));
-
+*/
     /*
     --------------------------
     END NORMAL LOGIC
@@ -113,7 +113,7 @@ $(function () {
 
     // Create element functions ----
 
-    function create$item(item) {
+    /*function create$item(item) {
 
         var $div = $('<div />');
         var $span = $('<span />').text(item.name);
@@ -202,10 +202,10 @@ $(function () {
         map.fitBounds(bounds);
 
     }
-
+*/
     // Utility functions ------
 
-    function findInCollection(collection, id) {
+    /*function findInCollection(collection, id) {
         return collection.filter(function (item) {
             return item.id === id;
         })[0];
@@ -219,7 +219,7 @@ $(function () {
         }
         return -1;
     }
-
+*/
     // End utility functions ----
 
 });
