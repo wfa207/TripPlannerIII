@@ -9,11 +9,11 @@ $(function () {
         activity: $('#activity-list').children('ul')
     };
 
-    var collections = {
+    /*var collections = {
         hotel: hotels,
         restaurant: restaurants,
         activity: activities
-    };
+    };*/
 
     var $itinerary = $('#itinerary');
 
@@ -101,9 +101,9 @@ $(function () {
 
     });
 
-    fillInOptions(hotels, $('#hotel-choices'));
+    /*fillInOptions(hotels, $('#hotel-choices'));
     fillInOptions(restaurants, $('#restaurant-choices'));
-    fillInOptions(activities, $('#activity-choices'));
+    fillInOptions(activities, $('#activity-choices'));*/
 
     /*
     --------------------------

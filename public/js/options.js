@@ -29,7 +29,7 @@ var $listGroups = {
         return $('<button class="btn btn-circle day-btn">' + number + '</button>');
     }
 
-    function switchDay(dayNum) {
+    /*function switchDay(dayNum) {
         wipeDay();
         // currentDayNum = dayNum;
         // renderDay();
@@ -63,7 +63,7 @@ var $listGroups = {
 
         map.fitBounds(bounds);
 
-    }
+    }*/
 
 /*
 	-----------------------------
