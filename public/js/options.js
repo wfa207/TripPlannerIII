@@ -72,7 +72,7 @@ var $listGroups = {
 */
 
 
-$.get('/api/hotels', function (hotels) {
+$.get('/api/hotel', function (hotels) {
 	hotels.forEach(function(hotel) {
 		var newop = new Option(hotel.name, hotel.id);
 		$('#hotel-choices').append(newop);
@@ -80,7 +80,7 @@ $.get('/api/hotels', function (hotels) {
 })
 .fail(console.error.bind(console));
 
-$.get('/api/restaurants', function (restaurants) {
+$.get('/api/restaurant', function (restaurants) {
 	restaurants.forEach(function(restaurant) {
 		var newop = new Option(restaurant.name, restaurant.id);
 		$('#restaurant-choices').append(newop);
@@ -88,7 +88,7 @@ $.get('/api/restaurants', function (restaurants) {
 })
 .fail(console.error.bind(console));
 
-$.get('/api/activities', function (activities) {
+$.get('/api/activity', function (activities) {
 	activities.forEach(function(activity) {
 		var newop = new Option(activity.name, activity.id);
 		$('#activity-choices').append(newop);
@@ -135,9 +135,15 @@ $dayButtonList.on('click', '.day-btn', function() {
 $addItemButton.on('click', function() {
 	var $this = $(this);
     var $select = $this.siblings('select');
-    $.post('/api/day/' + currentDay._id + '/hotel', {hotelId: 'THEHOTELID'})
-  	.done(successHandler)
-  	.fail(failureHandler);
+    var itemId = +$select.val();
+    var attraction = $select.attr('data-type');
+
+    // need to add the elements for the front end 
+    $.post('/api/day/' + currentDayNum + '/' + attraction, {hotelId: itemId});
+  	// .done(successHandler)
+  	// .fail(failureHandler);
+  	
+
 })
 /*
 	-------------------------

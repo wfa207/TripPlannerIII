@@ -6,7 +6,7 @@ var Activity = require('../../models/activity');
 var Place = require('../../models/place');
 var Promise = require('bluebird');
 
-router.get('/hotels', function(req, res, next) {
+router.get('/hotel', function(req, res, next) {
     Hotel.findAll({
         include: [Place]
     })
@@ -15,7 +15,7 @@ router.get('/hotels', function(req, res, next) {
     });
 });
 
-router.get('/restaurants', function(req, res, next) {
+router.get('/restaurant', function(req, res, next) {
     Restaurant.findAll({
         include: [Place]
     })
@@ -24,7 +24,7 @@ router.get('/restaurants', function(req, res, next) {
     });
 });
 
-router.get('/activities', function(req, res, next) {
+router.get('/activity', function(req, res, next) {
     Activity.findAll({
         include: [Place]
     })

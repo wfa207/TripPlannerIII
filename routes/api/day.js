@@ -67,8 +67,22 @@ router.post('/:id', function(req, res, next) {
 // });
 
 router.post('/:id/hotels', function(req, res, next) {
-	var id = req.params.id;
+	var dayId = req.params.id;
+	var hotelId = req.body.hotelId;
+	
+	hotel = Hotel.findById(hotelId);
+	day = Day.findOne({
+		where : {
+			number : dayId
+		}
+	});
+
+	Promise.all(hotel,day)
+	.spread(function(hotel,day) {
+		day.setHotel(hotel);
+	})
 });
+
 
 router.post('/:id/restaurants', function(req, res, next) {
 	var id = req.params.id;
