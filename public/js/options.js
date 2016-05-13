@@ -19,12 +19,6 @@ var $listGroups = {
     activity: $('#activity-list').children('ul')
 };
 
-var collections = {
-        hotel: hotels,
-        restaurant: restaurants,
-        activity: activities
-};
-
 /*
 	-------------------------
 	Helper functions
@@ -137,6 +131,13 @@ $dayButtonList.on('click', '.day-btn', function() {
 	.fail( console.error.bind(console));
     switchDay(dayNumberFromButton);
 })
+
+/*
+	-------------------------
+	AJAX Requests for Days
+	-------------------------
+*/
+
 
 
 // $.get('/api/day', function (data) {
