@@ -49,6 +49,7 @@ router.post('/:id', function(req, res, next) {
 	});
 });
 
+
 // router.delete('/:id', function(req, res, next) {
 // 	var id = req.params.id;
 // });
@@ -65,16 +66,16 @@ router.post('/:id', function(req, res, next) {
 	// var id = req.params.id;
 // });
 
-// router.post('/:id/hotels', function(req, res, next) {
-	// var id = req.params.id;
-// });
+router.post('/:id/hotels', function(req, res, next) {
+	var id = req.params.id;
+});
 
-// router.post('/:id/restaurants', function(req, res, next) {
-	// var id = req.params.id;
-// });
+router.post('/:id/restaurants', function(req, res, next) {
+	var id = req.params.id;
+});
 
-// router.post('/:id/activities', function(req, res, next) {
-	// var id = req.params.id;
-// });
+router.post('/:id/activities', function(req, res, next) {
+	var id = req.params.id;
+});
 
 module.exports = router;

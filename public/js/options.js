@@ -132,6 +132,13 @@ $dayButtonList.on('click', '.day-btn', function() {
     switchDay(dayNumberFromButton);
 })
 
+$addItemButton.on('click', function() {
+	var $this = $(this);
+    var $select = $this.siblings('select');
+    $.post('/api/day/' + currentDay._id + '/hotel', {hotelId: 'THEHOTELID'})
+  	.done(successHandler)
+  	.fail(failureHandler);
+})
 /*
 	-------------------------
 	AJAX Requests for Days
