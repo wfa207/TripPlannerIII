@@ -24,6 +24,9 @@ app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'));
 // serve any other static files
 app.use(express.static(__dirname + '/public'));
 
+// serve day routes
+app.use('/api/day', require('./routes/api/day'));
+
 // serve attraction routes
 app.use('/api', require('./routes/api/attractions'));
 
