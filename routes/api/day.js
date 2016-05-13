@@ -9,17 +9,27 @@ var Promise = require('bluebird');
 // Do we need to require other models as well?
 
 router.get('/', function(req, res, next) {
-	res.send({
-		data: 'response sent'
-	});
-
+	var id = req.params.id;
 	Day.findAll()
-		.then(function(days) {
-			console.log(days);
-		})
-		.catch(function(err) {
-			console.log(err);
-		});
+	.then(function(days) {
+		res.send(days);
+	})
+	.catch(function(err) {
+		console.error(err);
+	});
+});
+
+router.get('/:id', function(req, res, next) {
+	var id = req.params.id;
+	Day.findAll({
+		where: {number: id}
+	})
+	.then(function(days) {
+		res.send(days);
+	})
+	.catch(function(err) {
+		console.error(err);
+	});
 });
 
 // router.get('/:id', function(req, res, next) {
@@ -28,11 +38,19 @@ router.get('/', function(req, res, next) {
 
 router.post('/:id', function(req, res, next) {
 	var id = req.params.id;
-	Day.create()
+	Day.create({
+		number : id
+	})
+	.then(function(newDay) {
+		res.send(newDay);
+	})
+	.catch(function(err) {
+		console.error(err);
+	});
 });
 
 // router.delete('/:id', function(req, res, next) {
-	// var id = req.params.id;
+// 	var id = req.params.id;
 // });
 
 // router.get('/:id/hotels', function(req, res, next) {

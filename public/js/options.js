@@ -1,3 +1,66 @@
+/*
+	-------------------------
+	Variable Declarations
+	-------------------------
+*/
+
+var $addDayButton = $('#day-add');
+var $dayButtonList = $('.day-buttons');
+var $dayTitle = $('#day-title').children('span');
+
+/*
+	-------------------------
+	Helper functions
+	-------------------------
+*/
+
+	function createDayButton(number) {
+        return $('<button class="btn btn-circle day-btn">' + number + '</button>');
+    }
+
+    function switchDay(dayNum) {
+        wipeDay();
+        // currentDayNum = dayNum;
+        // renderDay();
+        $dayTitle.text('Day ' + dayNum);
+        mapFit();
+    }
+
+    function wipeDay() {
+
+        $dayButtonList.children('button').removeClass('current-day');
+
+        Object.keys($listGroups).forEach(function (key) {
+           $listGroups[key].empty();
+        });
+
+        if (days[currentDayNum - 1]) {
+            days[currentDayNum - 1].forEach(function (attraction) {
+                attraction.marker.setMap(null);
+            });
+        }
+    }
+
+    function mapFit() {
+
+        var currentDay = days[currentDayNum - 1];
+        var bounds = new google.maps.LatLngBounds();
+
+        currentDay.forEach(function (attraction) {
+            bounds.extend(attraction.marker.position);
+        });
+
+        map.fitBounds(bounds);
+
+    }
+
+/*
+	-----------------------------
+	AJAX Requests on LOAD
+	-----------------------------
+*/
+
+
 $.get('/api/hotels', function (hotels) {
 	hotels.forEach(function(hotel) {
 		var newop = new Option(hotel.name, hotel.id);
@@ -22,20 +85,56 @@ $.get('/api/activities', function (activities) {
 })
 .fail(console.error.bind(console));
 
-$.get('/api/day', function (data) {
-	console.log('GET response data', data);
+$.get('api/day', function(days) {
+	days.forEach(function(day) {
+		var newDayButton = createDayButton(+day.number);
+		$addDayButton.before(newDayButton);
+	});
+});
+
+
+/*
+	-------------------------
+	AJAX Requests for Days
+	-------------------------
+*/
+
+// our POST request
+$addDayButton.on('click', function () {
+		var newDayNum = +$(this).prev().text()+1;
+		var $newDayButton = createDayButton(newDayNum);
+		var me = this;
+		$.post('/api/day/'+newDayNum, function (data) {
+			$(me).before($newDayButton);
+		})
+		.fail( console.error.bind(console));
+});
+
+// our GET request
+$dayButtonList.on('click', '.day-btn', function() {
+	var dayNumberFromButton = +$(this).text();
+	$.get('/api/day/'+dayNumberFromButton, function (data) {
+		console.log('/GET Day ' + dayNumberFromButton + ' data: ', data);
+	})
+	.fail( console.error.bind(console));
+    switchDay(dayNumberFromButton);
 })
-.fail( console.error.bind(console));
+
+
+// $.get('/api/day', function (data) {
+// 	console.log('/GET Day 0 data: ', data);
+// })
+// .fail( console.error.bind(console));
 
 // should log an empty array
-$.post('/api/day', function (data) {
-	console.log('POST response data', data);
+/*$.post('/api/day', function (data) {
+	console.log('/POST Day 1 data: ', data);
 })
 .fail( console.error.bind(console));
 
 // should log a new day
 $.get('/api/day', function (data) {
-	console.log('GET response data', data);
+	console.log('/GET Day 1 data: ', data);
 })
-.fail( console.error.bind(console));
+.fail( console.error.bind(console));*/
 // should now log an array with the new day in it
