@@ -4,9 +4,26 @@
 	-------------------------
 */
 
+var $addItemButton = $('#options-panel').find('button');
+var $itinerary = $('#itinerary');
 var $addDayButton = $('#day-add');
-var $dayButtonList = $('.day-buttons');
 var $dayTitle = $('#day-title').children('span');
+var $removeDayButton = $('#day-title').children('button');
+var $dayButtonList = $('.day-buttons');
+// How do we make currentDayNum persist
+var currentDayNum = 1;
+
+var $listGroups = {
+    hotel: $('#hotel-list').children('ul'),
+    restaurant: $('#restaurant-list').children('ul'),
+    activity: $('#activity-list').children('ul')
+};
+
+var collections = {
+        hotel: hotels,
+        restaurant: restaurants,
+        activity: activities
+};
 
 /*
 	-------------------------
@@ -56,7 +73,7 @@ var $dayTitle = $('#day-title').children('span');
 
 /*
 	-----------------------------
-	AJAX Requests on LOAD
+	AJAX Methods on LOAD
 	-----------------------------
 */
 
@@ -105,6 +122,7 @@ $addDayButton.on('click', function () {
 		var $newDayButton = createDayButton(newDayNum);
 		var me = this;
 		$.post('/api/day/'+newDayNum, function (data) {
+			// NEED TO MAKE SURE response is NOT FOR EXISTING DAY!!
 			$(me).before($newDayButton);
 		})
 		.fail( console.error.bind(console));
